@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mental Health in Tech</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/dc.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css" />
+
+
+    <script type="text/javascript" src="static/js/d3.min.js"></script>
+    <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
+    <script type="text/javascript" src="static/js/dc.min.js"></script>
+    <script type="text/javascript" src="static/js/queue.min.js"></script>
+    <script type="text/javascript" src="static/js/graph.js"></script>
+
+</head>
+
+<body>
+    
+        <div class="container">
+            <div class="text-center">
+                
+                <h4 class="text-light bg-dark" >Projet Data Visualisation : Sondage sur la santé mentale dans le secteur technologique </h4>
+
+            </div>
+           
+        </div>
+    
+
+    <div class="container">
+        <section class="container">
+            <div class="col-xs-12">
+                <div class="content-box">
+                    <h3 class="header">Introduction</h3>
+
+                    <hr class="line">
+                    <p class="chart-text">Ce projet contient des données provenant à l'origine via Kaggle et vise à analyser la santé mentale dans les entreprises technologiques.<br></p>
+                    <p class="chart-text">Les visualisations de données ci-dessous visent à donner un bref aperçu des données des répondants avant d'analyser certaines des tendances contenues dans les données. <br></p>
+                    
+                    <p class="chart-text">Pour commencer, veuillez filtrer les données en utilisant l'une des sélections ci-dessous.<br></p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="row col-xs-12 col-lg-4">
+                                <h6 class="header">Tech Company:</h6>
+                                <span class="filter" id="select_company"></span>
+                            </div>
+                            <div class="row col-xs-12 col-lg-4">
+                                <h6 class="header">Gender:</h6>
+                                <span class="filter" id="select_gender"></span>
+                            </div>
+                            <div class="row col-xs-12 col-lg-4">
+                                <h6 class="header">Date:</h6>
+                                <span class="filter" id="select_date"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="content-box">
+                        <h5 class="header">Respondents</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="respondents_display"><i class="fas fa-users"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="content-box">
+                        <h5 class="header">Avg Age Male</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="average_age_male"><i class="fas fa-male"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="content-box">
+                        <h5 class="header">Avg Age Female</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="average_age_gender"><i class="fas fa-female"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="content-box">
+                        <h5 class="header">Tech Companies</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="tech_display"><i class="fas fa-cogs"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+                        <h5 class="header">Répartition par sexe</h5>
+                        <hr class="line">
+                        <p class="chart-text">Sur le nombre total de répondants, 997 se sont identifiés comme hommes, contre 248 femmes et 14 dans l'autre catégorie.</p>
+                        <div class="row chart">
+                            <div id="gender_breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+                        <h5 class="header">Répartition par pays</h5>
+                        <hr class="line">
+                        <p class="chart-text">Plus de 50 % des répondants étaient originaires des États-Unis, le Royaume-Uni venant en deuxième position.</p>
+                        <div class="row chart">
+                            <div id="country_breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="content-box">
+                        <h5 class="header">Répartition par âge</h5>
+                        <hr class="line">
+                        <p class="chart-text">Sur le total, la plupart des répondants appartenaient à la catégorie des 24-39 ans (920).<br> Il y avait 26 répondants de la catégorie des 50 ans et plus, ce qui en fait la moins représentée.</p>
+                        <div class="row chart">
+                            <div id="age_breakdown"></div>
+                        </div>
+                    <p class="chart-text">Il n'y a que 26 répondants dans la catégorie des 50 ans et plus, dont 20 aux États-Unis. 66% des hommes et 50% des femmes de cette catégorie avaient précédemment demandé un traitement pour un problème de santé mentale.<br>
+                    Cependant, 70% des femmes de la catégorie des 25 à 39 ans ont indiqué qu'elles avaient déjà demandé de l'aide.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+
+                        <h5 class="header">Traitement par sexe</h5>
+
+                        <hr class="line">
+                        <p class="chart-text">Près de 69% du total des femmes interrogées et 45% du total des hommes interrogés ont indiqué avoir déjà demandé un traitement pour un problème de santé mentale, tout comme 85% de ceux qui se sont identifiés dans la catégorie «Autre». </p>
+                        <div class="row chart">
+                            <div id="treatment_by_gender"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+
+                        <h5 class="header">Niveaux globaux de traitement</h5>
+
+                        <hr class="line">
+                        <p class="chart-text">Il y a un partage presque 50/50 entre les répondants qui avaient déjà demandé de l'aide pour des problèmes de santé mentale et ceux qui ne l'avaient pas fait.</p>
+                        <div class="row chart">
+                            <div id="treatment_chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="content-box">
+                        <h5 class="header">Family History</h5>
+                        <hr class="line">
+                        <p class="chart-text">Sur le nombre total de répondants, 492 ont indiqué que les problèmes de santé mentale étaient répandus dans leurs antécédents familiaux.</p>
+                        <div class="row chart">
+                            <div id="family_history"></div>
+                        </div>
+                        <p class="chart-text">Lorsqu'ils sont filtrés par «yes», les chiffres pour les niveaux de traitement globaux et le traitement par sexe augmentent, ce qui indique une corrélation entre les antécédents familiaux et les problèmes de santé mentale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+                        <h5 class="header">Impact physique</h5>
+                        <hr class="line">
+                        <p class="chart-text">7% des femmes et 4% des hommes estiment que la  discution  avec leur employeur  sur les problème de santé physique aurait des conséquences négatives.</p>
+                        <div class="row chart">
+                            <div id="physical_impact"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="content-box">
+
+                        <h5 class="header">Impact mental</h5>
+                        <hr class="line">
+                        <p class="chart-text">27% des femmes et 22% des hommes estiment que la  discutions  avec leur employeur  sur les problème de santé mentale aurait des conséquences négatives. Cela contraste avec les chiffres beaucoup plus faibles pour la santé physique.
+                        </p>
+                        <div class="row chart">
+                            <div id="mental_impact"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="content-box">
+                        <h5 class="header">Programme de bien-être</h5>
+                        <hr class="line">
+                        <div>
+                            <p class="chart-text">La majorité des répondants ont indiqué que la santé mentale ne faisait pas partie d'un programme de mieux-être des employés.</p>
+                        </div>
+                        <div class="row chart">
+                            <div id="wellness_chart"></div>
+                        </div>
+                        <p class="chart-text">Lorsqu'elles sont filtrées par «Non», les attentes à l'égard des problèmes soulevés par les employeurs à la fois physiques et mentaux étaient plus négatives. Cela indique une corrélation possible entre les cultures et les programmes de bien-être.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/mhdashboard/static/js/scripts.js"></script>
+
+    <footer class="page-footer container-fluid">
+        <div class="container-fluid">
+            <div class="page-footer text-center py-3">© ESI 2020</div>
+        </div>
+    </footer>
+</body>
+
+</html>

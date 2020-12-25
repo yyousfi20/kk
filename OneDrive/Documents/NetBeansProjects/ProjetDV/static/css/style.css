@@ -1,0 +1,69 @@
+body {
+background-color: lightblue;
+}
+
+
+.title {
+color: coral;
+font-size: 25px;
+font-weight: 200;
+margin-top: 10px;
+}
+
+.filter {
+padding-top: 2.5px;
+}
+
+.header {
+margin: auto;
+text-align: center;
+padding: 5px;
+}
+
+.chart-text {
+font-size: medium;
+color: black;
+margin: 5px 5px 10px 5px;
+}
+
+.line {
+margin: 5px auto 5px;
+color: yellow;
+width: 75%;
+}
+
+.content-box {
+box-sizing: border-box;
+border-radius: 25px;
+background-color: #F0FFFF;
+opacity: 0.9;
+text-align: center;
+margin: 10px;
+padding: 7.5px;
+}
+
+.top-link {
+
+ font-size: 30px;
+padding: 25px;
+
+}
+
+.number-display {
+justify-content: center;
+font-size: 30px;
+font-weight: 500;
+padding: 25px;
+
+}
+
+.page-footer {
+background-color: #FFF8DC;
+width: 100%;
+opacity: 0.75;
+}
+
+.chart {
+margin: 10px;
+justify-content: center;
+}
